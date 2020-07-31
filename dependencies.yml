@@ -1,0 +1,28 @@
+# Simple form:
+com.google.code.findbugs:
+  jsr305: { version: "3.0.2" }
+
+# Slightly more verbose, but useful when an artifact has more than one property:
+com.google.guava:
+  guava:
+    version: "23.6-jre"
+    exclusions:
+      - com.google.code.findbugs:jsr305
+      - com.google.errorprone:error_prone_annotations
+      - com.google.j2objc:j2objc-annotations
+      - org.codehaus.mojo:animal-sniffer-annotations
+
+# More than one artifact under the same group:
+com.fasterxml.jackson.core:
+  jackson-annotations:
+    version: &JACKSON_VERSION "2.9.2" # Using a YAML anchor
+    javadocs:
+      - https://fasterxml.github.io/jackson-annotations/javadoc/2.9/
+  jackson-core:
+    version: *JACKSON_VERSION
+    javadocs:
+      - https://fasterxml.github.io/jackson-core/javadoc/2.9/
+  jackson-databind:
+    version: *JACKSON_VERSION
+    javadocs:
+      - https://fasterxml.github.io/jackson-databind/javadoc/2.9/
