@@ -1,0 +1,7 @@
+dependencies {
+    compileOnly 'org.apache.thrift:libthrift'
+    compileOnly 'com.linecorp.armeria:armeria-zookeeper3'
+    compileOnly 'com.linecorp.armeria:armeria-brave'
+    implementation 'com.linecorp.armeria:armeria-brave'
+    compileOnly 'io.zipkin.reporter2:zipkin-sender-urlconnection'
+}

@@ -1,0 +1,14 @@
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+dependencies {
+    implementation 'org.mybatis.generator:mybatis-generator-core'
+    implementation 'org.mybatis:mybatis'
+    implementation 'mysql:mysql-connector-java'
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'io.springfox:springfox-swagger2'
+}

@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(":fakemall:product-api")
+    implementation 'io.micrometer:micrometer-registry-prometheus'
+    implementation 'io.prometheus:simpleclient_common'
+    implementation 'com.linecorp.armeria:armeria-zookeeper3'
+    implementation 'com.linecorp.armeria:armeria-brave'
+    implementation 'io.zipkin.reporter2:zipkin-sender-urlconnection'
+}

@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "c82e8f13-de58-4838-98b0-c65330b5c07d",
+		"name": "armeria-mannual-test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "saveUsers",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n{\n    \"firstname\": \"eone\",\n    \"lastname\": \"zhang\"\n},\n{\n    \"firstname\": \"eone1\",\n    \"lastname\": \"zhang1\"\n},\n{\n    \"firstname\": \"eone2\",\n    \"lastname\": \"zhang2\"\n}\n\n]\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/batchSave",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"batchSave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getUsers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

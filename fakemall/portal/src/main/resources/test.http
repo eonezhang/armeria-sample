@@ -1,0 +1,12 @@
+GET http://127.0.0.1:9092/createOrder
+Accept: application/json
+
+###
+GET http://127.0.0.1:9080/internal/prometheus/metrics
+#Accept: application/json
+
+###
+GET http://127.0.0.1:9091/internal/prometheus/metrics
+###
+GET http://127.0.0.1:9092/internal/prometheus/metrics
+###

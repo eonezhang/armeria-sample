@@ -1,0 +1,29 @@
+buildscript {
+//    repositories {
+//        gradlePluginPortal()
+//    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${managedVersions['org.springframework.boot:spring-boot-gradle-plugin']}"
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+dependencies {
+    implementation project(":mall:mbg")
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation 'com.github.pagehelper:pagehelper'
+    implementation 'org.mybatis:mybatis'
+    runtimeOnly 'mysql:mysql-connector-java'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'io.springfox:springfox-swagger2'
+}

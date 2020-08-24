@@ -1,0 +1,25 @@
+dependencies {
+    implementation 'org.slf4j:slf4j-simple'
+    implementation 'dev.miku:r2dbc-mysql'
+    implementation 'io.r2dbc:r2dbc-pool'
+    implementation 'io.projectreactor:reactor-core'
+    implementation 'org.springframework.data:spring-data-r2dbc'
+
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.awaitility:awaitility'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

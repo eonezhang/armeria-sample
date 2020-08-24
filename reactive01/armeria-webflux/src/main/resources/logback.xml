@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <appender name="abc-log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <File>logs-armeria.log</File>
+    <encoder>
+      <pattern>
+        %d{HH:mm:ss.SSS}|%logger|%-4level|%X{remote.ip}|%X{elapsed_nanos}|%X{req.headers.user-agent}|%msg%n
+      </pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <FileNamePattern>logs-armeria.%d{yyyy-MM-dd}.%i.log.zip</FileNamePattern>
+      <MaxHistory>50</MaxHistory>
+      <maxFileSize>200MB</maxFileSize>
+      <totalSizeCap>10GB</totalSizeCap>
+      <CleanHistoryOnStart>true</CleanHistoryOnStart>
+    </rollingPolicy>
+  </appender>
+
+  <appender name="trace-async-appender" class="ch.qos.logback.classic.AsyncAppender">
+    <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+    <queueSize>2048</queueSize>
+    <!-- 添加附加的appender,最多只能添加一个 -->
+    <appender-ref ref="abc-log" />
+  </appender>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        %d{HH:mm:ss.SSS}|%logger|%-4level|%X{remote.ip}|%X{elapsed_nanos}|%X{req.headers.user-agent}|%msg%n
+      </pattern>
+    </encoder>
+  </appender>
+
+  <appender name="RCEA" class="com.linecorp.armeria.common.logback.RequestContextExportingAppender">
+    <!--    <appender-ref ref="CONSOLE" />-->
+    <appender-ref ref="trace-async-appender" />
+    <export>remote.ip</export>
+    <export>elapsed_nanos</export>
+    <export>req.headers.user-agent</export>
+    <export>req.id</export>
+  </appender>
+  <!--  <logger name="com.linecorp.armeria.server.logging.LoggingService" level="DEBUG"/>-->
+  <root level="INFO">
+<!--    <appender-ref ref="RCEA" />-->
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

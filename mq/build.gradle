@@ -1,0 +1,21 @@
+dependencies {
+    implementation 'org.slf4j:slf4j-simple'
+    implementation 'org.apache.rocketmq:rocketmq-client'
+
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.awaitility:awaitility'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

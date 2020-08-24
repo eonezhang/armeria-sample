@@ -1,0 +1,15 @@
+GET http://localhost:8080/pages/login.html
+Accept-Encoding: gzip, identity
+###
+
+GET http://localhost:8080/pages/index.html
+Accept-Encoding: gzip, identity
+Accept: text/html
+
+###
+POST http://localhost:8080/users/login?username=eonezhang&password=123456
+Content-Type: application/json
+
+{}
+
+###

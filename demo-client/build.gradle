@@ -1,0 +1,36 @@
+dependencies {
+    implementation project(":grpc-api")
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
+    implementation 'io.projectreactor:reactor-core'
+
+//    implementation 'com.linecorp.armeria:armeria'
+    implementation 'com.google.protobuf:protobuf-java'
+    implementation 'com.linecorp.armeria:armeria-grpc'
+
+    implementation 'org.apache.thrift:libthrift'
+    implementation 'com.linecorp.armeria:armeria-thrift0.13'
+
+    implementation 'ch.qos.logback:logback-classic'
+
+    implementation 'org.apache.rocketmq:rocketmq-client'
+
+    testImplementation 'org.assertj:assertj-core'
+    testImplementation 'org.awaitility:awaitility'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

@@ -1,0 +1,49 @@
+buildscript {
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${managedVersions['org.springframework.boot:spring-boot-gradle-plugin']}"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+dependencies {
+//    implementation 'dev.miku:r2dbc-mysql'
+    implementation 'io.r2dbc:r2dbc-h2'
+    implementation 'io.r2dbc:r2dbc-pool'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    implementation 'com.google.guava:guava'
+    implementation 'com.linecorp.armeria:armeria-spring-boot2-webflux-starter'
+
+//    implementation 'com.linecorp.armeria:armeria-spring-boot2-actuator-starter'
+    implementation 'org.hibernate.validator:hibernate-validator'
+
+
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'io.r2dbc:r2dbc-h2'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

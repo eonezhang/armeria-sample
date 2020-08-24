@@ -1,0 +1,21 @@
+dependencies {
+    implementation 'com.linecorp.armeria:armeria-thrift0.13'
+    implementation 'ch.qos.logback:logback-classic'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

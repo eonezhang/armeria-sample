@@ -1,11 +1,44 @@
+boms:
+  - com.fasterxml.jackson:jackson-bom:2.11.2
+  - io.grpc:grpc-bom:1.31.1
+#  - io.projectreactor:reactor-bom:Dysprosium-SR9
+  - io.micrometer:micrometer-bom:1.5.4
+  # NOTE: When changing this, re-evaluate netty-tcnative-boringssl-static below
+  - io.netty:netty-bom:4.1.51.Final
+  - org.junit:junit-bom:5.6.2
+  - com.linecorp.armeria:armeria-bom:1.0.0
+  - io.zipkin.brave:brave-bom:5.12.4
+  - org.springframework.boot:spring-boot-dependencies:2.3.3.RELEASE
+  - io.r2dbc:r2dbc-bom:Arabba-SR6
+
 # Simple form:
 com.google.code.findbugs:
   jsr305: { version: "3.0.2" }
 
+org.openjdk.jmh:
+  jmh-core: { version: &JMH_VERSION '1.23' }
+  jmh-generator-annprocess: { version: *JMH_VERSION }
+
+me.champeau.gradle:
+  jmh-gradle-plugin: { version: '0.5.0' }
+
+org.reactivestreams:
+  reactive-streams: { version: &REACTIVE_STREAMS_VERSION '1.0.3' }
+  reactive-streams-tck:
+    version: *REACTIVE_STREAMS_VERSION
+    exclusions:
+      - org.yaml:snakeyaml
+io.projectreactor:
+  reactor-core:
+    version: &REACTOR_VERSION '3.3.9.RELEASE'
+    javadocs:
+      - https://projectreactor.io/docs/core/release/api/
+  reactor-test: { version: *REACTOR_VERSION }
+
 # Slightly more verbose, but useful when an artifact has more than one property:
 com.google.guava:
   guava:
-    version: "23.6-jre"
+    version: "29.0-jre"
     exclusions:
       - com.google.code.findbugs:jsr305
       - com.google.errorprone:error_prone_annotations
@@ -26,3 +59,138 @@ com.fasterxml.jackson.core:
     version: *JACKSON_VERSION
     javadocs:
       - https://fasterxml.github.io/jackson-databind/javadoc/2.9/
+gradle.plugin.net.davidecavestro:
+  gradle-jxr-plugin: { version: '0.2.1' }
+
+org.apache.thrift:
+  libthrift:
+    version: '0.13.0'
+#    javadocs:
+#      - https://www.javadoc.io/doc/org.apache.thrift/libthrift/0.13.0/
+    exclusions:
+      - javax.annotation:javax.annotation-api
+      - org.apache.httpcomponents:httpcore
+      - org.apache.httpcomponents:httpclient
+
+# Ensure that we use the same Protobuf version as what gRPC depends on.
+# See: https://github.com/grpc/grpc-java/blob/master/build.gradle
+#      (Switch to the right tag and look for 'protobufVersion' and 'protocVersion'.)
+com.google.protobuf:
+  protobuf-java: { version: &PROTOBUF_VERSION '3.12.4' }
+  protobuf-java-util:
+    version: *PROTOBUF_VERSION
+    exclusions:
+      - com.google.errorprone:error_prone_annotations
+  protobuf-gradle-plugin: { version: '0.8.12' }
+  protoc: { version: *PROTOBUF_VERSION }
+
+# Ensure to update the Protobuf version in this file when updating gRPC.
+io.grpc:
+  grpc-core:
+    javadocs:
+#      - https://grpc.io/grpc-java/javadoc/
+#      - https://developers.google.com/protocol-buffers/docs/reference/java/
+    exclusions:
+      - com.google.errorprone:error_prone_annotations
+      - org.codehaus.mojo:animal-sniffer-annotations
+  grpc-interop-testing:
+    exclusions:
+      - com.google.errorprone:error_prone_annotations
+      - com.google.guava:guava-jdk5
+      - com.google.j2objc:j2objc-annotations
+      - io.grpc:grpc-alts
+      - io.grpc:grpc-xds
+      - io.netty:netty-codec-http
+      - io.netty:netty-codec-http2
+      - io.netty:netty-codec-socks
+      - io.netty:netty-handler-proxy
+      - io.netty:netty-transport
+      - io.netty:netty-tcnative-boringssl-static
+#  grpc-kotlin-stub: { version: &GRPC_KOTLIN_VERSION '0.1.4' }
+#  protoc-gen-grpc-kotlin: { version: *GRPC_KOTLIN_VERSION }
+
+io.netty:
+  netty-tcnative-boringssl-static: { version: '2.0.31.Final' }
+io.prometheus:
+  simpleclient_common:
+    version: '0.9.0'
+
+com.salesforce.servicelibs:
+  reactor-grpc: { version: &REACTVIVE_GRPC_VERSION '1.0.1' }
+  reactor-grpc-stub: { version: *REACTVIVE_GRPC_VERSION }
+
+org.assertj:
+  assertj-core: { version: '3.16.1' }
+
+org.awaitility:
+  awaitility: { version: '4.0.3' }
+
+org.mockito:
+  mockito-core: { version: &MOCKITO_VERSION '3.4.6' }
+  mockito-junit-jupiter: { version: *MOCKITO_VERSION }
+
+org.junit.jupiter:
+  junit-jupiter-api:
+    javadocs:
+      # ':site:javadoc' fails when we use a newer version of Javadoc.
+      - https://junit.org/junit5/docs/5.5.2/api/
+
+org.slf4j:
+  jcl-over-slf4j: { version: &SLF4J_VERSION '1.7.30' }
+  jul-to-slf4j: { version: *SLF4J_VERSION }
+  log4j-over-slf4j: { version: *SLF4J_VERSION }
+  slf4j-api:
+    version: *SLF4J_VERSION
+    javadocs:
+      - https://www.javadoc.io/doc/org.slf4j/slf4j-api/1.7.30/
+  slf4j-simple: { version: *SLF4J_VERSION }
+
+org.apache.rocketmq:
+  rocketmq-client: { version: '4.4.0' }
+
+ch.qos.logback:
+  logback-classic: { version: '1.2.3' }
+
+org.mybatis.generator:
+  mybatis-generator-core: { version: '1.4.0'}
+com.github.pagehelper:
+  pagehelper: { version: '5.2.0' }
+
+org.projectlombok:
+  lombok: { version: '1.18.12' }
+
+dev.miku:
+  r2dbc-mysql: { version: '0.8.2.RELEASE' }
+io.r2dbc:
+  r2dbc-pool: { version: '0.8.3.RELEASE' }
+  r2dbc-h2:  { version: '0.8.4.RELEASE' }
+org.springframework.data:
+  spring-data-r2dbc: { version: '1.1.3.RELEASE' }
+
+mysql:
+  mysql-connector-java: { version: '5.1.49' }
+
+io.springfox:
+  springfox-swagger2: { version: '2.10.5' }
+org.mybatis:
+  mybatis: { version: '3.5.5' }
+
+org.hibernate.validator:
+  hibernate-validator: { version: '6.1.5.Final'}
+
+org.springframework.boot:
+  spring-boot-starter:
+    version: &SPRING_BOOT_VERSION '2.3.2.RELEASE'
+#    javadocs:
+#      - https://docs.spring.io/spring/docs/current/javadoc-api/
+  spring-boot-actuator-autoconfigure: { version: *SPRING_BOOT_VERSION }
+  spring-boot-autoconfigure: { version: *SPRING_BOOT_VERSION }
+  spring-boot-starter-actuator: { version: *SPRING_BOOT_VERSION }
+  spring-boot-starter-test: { version: *SPRING_BOOT_VERSION }
+  spring-boot-starter-web: { version: *SPRING_BOOT_VERSION }
+  spring-boot-starter-webflux:
+    version: *SPRING_BOOT_VERSION
+    exclusions:
+      - org.springframework.boot:spring-boot-starter-reactor-netty
+  spring-boot-configuration-processor: { version: *SPRING_BOOT_VERSION }
+  spring-boot-gradle-plugin: { version: *SPRING_BOOT_VERSION }

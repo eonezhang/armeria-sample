@@ -1,0 +1,43 @@
+buildscript {
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${managedVersions['org.springframework.boot:spring-boot-gradle-plugin']}"
+    }
+}
+
+apply plugin: 'org.springframework.boot'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+dependencies {
+    implementation 'com.google.guava:guava'
+    implementation 'org.hibernate.validator:hibernate-validator'
+    implementation 'ch.qos.logback:logback-classic'
+
+    implementation 'io.r2dbc:r2dbc-h2'
+    implementation 'io.r2dbc:r2dbc-pool'
+    implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok'
+
+    testImplementation 'io.projectreactor:reactor-test'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+    options.encoding = 'UTF-8'
+    options.debug = true
+    options.compilerArgs += '-parameters'
+}
+
+tasks.withType(Test) {
+    useJUnitPlatform()
+}

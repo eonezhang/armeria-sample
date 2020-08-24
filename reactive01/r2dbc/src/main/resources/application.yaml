@@ -1,0 +1,10 @@
+server:
+  port: 8443
+  ssl:
+    enabled: true # Uses self-signed certificate because no key-store configuration is specified.
+
+#armeria:
+#  ports:
+#    - port: 8081
+debug: true
+#      protocol: HTTP
